@@ -37,6 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
           result.message || "Registration successful!",
           "success",
         );
+        // Redirect to login page after short delay
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1500);
       } else {
         showMessage(message, result.error || "Something went wrong.");
       }
