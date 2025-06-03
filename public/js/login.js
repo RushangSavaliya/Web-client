@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(`${window.API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (res.ok) {
         showMessage(message, result.message || "Login successful!", "success");
         form.reset();
-        // Optional redirect
+        // Optional redirect here
       } else {
         showMessage(message, result.error || "Login failed.");
       }

@@ -19,6 +19,12 @@ app.get("/login", (_req, res) => {
   res.sendFile(path.resolve("public/html/login.html"));
 });
 
+// Serve config.js that exposes API URL
+app.get("/js/config.js", (_req, res) => {
+  res.type(".js");
+  res.send(`window.API_URL = "${process.env.URL}";`);
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}/`);
 });
