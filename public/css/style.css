@@ -1,0 +1,89 @@
+/* /public/css/style.css */
+
+:root {
+    --bg: #f9f9f9;
+    --fg: #111;
+    --primary: #0070f3;
+    --primary-hover: #005bb5;
+    --error: #d8000c;
+    --success: #4f8a10;
+    --radius: 6px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --input-bg: #fff;
+    --input-border: #ccc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+h1,
+h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--primary);
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--input-bg);
+}
+
+form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+#message {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+#message.success {
+    color: var(--success);
+}
+
+#message.error {
+    color: var(--error);
+}

@@ -1,20 +1,22 @@
-import dotenv from "dotenv";
-dotenv.config();
+// server.js
 
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // fallback to 3000 if .env PORT missing
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
+app.use(express.static("public"));
 
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(__dirname, "register.html"));
+  res.sendFile(path.resolve("public/html/register.html"));
+});
+
+app.get("/login", (_req, res) => {
+  res.sendFile(path.resolve("public/html/login.html"));
 });
 
 app.listen(PORT, () => {
