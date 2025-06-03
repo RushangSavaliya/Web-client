@@ -1,8 +1,13 @@
-// public/js/login.js
-
 import { showMessage } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 🔒 Redirect if already logged in
+  const token = localStorage.getItem("sessionToken");
+  if (token) {
+    window.location.href = "/dashboard";
+    return;
+  }
+
   const form = document.getElementById("loginForm");
   const message = document.getElementById("message");
 
@@ -30,9 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await res.json();
 
       if (res.ok) {
+        localStorage.setItem("sessionToken", result.token);
         showMessage(message, result.message || "Login successful!", "success");
         form.reset();
-        // Optional redirect here
+
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 1500);
       } else {
         showMessage(message, result.error || "Login failed.");
       }

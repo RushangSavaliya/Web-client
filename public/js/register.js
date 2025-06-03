@@ -31,16 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await res.json();
 
       if (res.ok) {
-        form.reset();
         showMessage(
           message,
           result.message || "Registration successful!",
           "success",
         );
-        // Redirect to login page after short delay
+        form.reset();
+
+        // Redirect to login page after 2 seconds
         setTimeout(() => {
           window.location.href = "/login";
-        }, 1500);
+        }, 2000);
       } else {
         showMessage(message, result.error || "Something went wrong.");
       }
