@@ -87,3 +87,20 @@ button:hover {
 #message.error {
     color: var(--error);
 }
+
+.login-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--fg);
+}
+
+.login-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
