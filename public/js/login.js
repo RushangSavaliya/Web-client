@@ -1,9 +1,9 @@
-import { showMessage } from "./utils.js";
+// public/js/login.js
+
+import { showMessage } from "./modules/utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 🔒 Redirect if already logged in
-  const token = localStorage.getItem("sessionToken");
-  if (token) {
+  if (localStorage.getItem("sessionToken")) {
     window.location.href = "/dashboard";
     return;
   }
@@ -13,15 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const username = form.username.value.trim();
+    const password = form.password.value;
 
-    const { username, password } = form;
-    const data = {
-      username: username.value.trim(),
-      password: password.value,
-    };
-
-    if (!data.username || !data.password) {
-      showMessage(message, "Please fill in both fields.");
+    if (!username || !password) {
+      showMessage(message, "Please fill in both fields.", "error");
       return;
     }
 
@@ -29,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`${window.API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ username, password }),
       });
 
       const result = await res.json();
@@ -38,15 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("sessionToken", result.token);
         showMessage(message, result.message || "Login successful!", "success");
         form.reset();
-
-        setTimeout(() => {
-          window.location.href = "/dashboard";
-        }, 1500);
+        setTimeout(() => (window.location.href = "/dashboard"), 1500);
       } else {
-        showMessage(message, result.error || "Login failed.");
+        showMessage(message, result.error || "Login failed.", "error");
       }
     } catch {
-      showMessage(message, "Network error. Try again.");
+      showMessage(message, "Network error. Try again.", "error");
     }
   });
 });
